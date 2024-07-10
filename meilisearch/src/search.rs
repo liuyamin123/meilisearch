@@ -1123,10 +1123,16 @@ fn make_hits(
     formatter_builder.crop_marker(format.crop_marker);
     formatter_builder.highlight_prefix(format.highlight_pre_tag);
     formatter_builder.highlight_suffix(format.highlight_post_tag);
+    let decompression_dictionary = index.document_decompression_dictionary(rtxn)?;
+    let mut buffer = Vec::new();
     let mut documents = Vec::new();
     let embedding_configs = index.embedding_configs(rtxn)?;
-    let documents_iter = index.documents(rtxn, documents_ids)?;
-    for ((id, obkv), score) in documents_iter.into_iter().zip(document_scores.into_iter()) {
+    let documents_iter = index.compressed_documents(rtxn, documents_ids)?;
+    for ((id, compressed), score) in documents_iter.into_iter().zip(document_scores.into_iter()) {
+        let obkv = compressed
+            .decompress_with_optional_dictionary(&mut buffer, decompression_dictionary.as_ref())
+            // TODO use a better error?
+            .map_err(|e| MeilisearchHttpError::HeedError(e.into()))?;
         // First generate a document with all the displayed fields
         let displayed_document = make_document(&displayed_ids, &fields_ids_map, obkv)?;
 
