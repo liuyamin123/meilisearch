@@ -2221,11 +2221,11 @@ checksum = "d2fabcfbdc87f4758337ca535fb41a6d701b65693ce38287d856d1674551ec9b"
 [[package]]
 name = "grenad"
 version = "0.4.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "350d89047298d3b1b40050acd11ab76e487b854a104b760ebc5a7f375093de77"
+source = "git+https://github.com/meilisearch/grenad?branch=various-improvements#58ac87d852413571102f44c5e55ca13509a3f1a0"
 dependencies = [
  "bytemuck",
  "byteorder",
+ "either",
  "rayon",
  "tempfile",
 ]
@@ -2838,7 +2838,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e310b3a6b5907f99202fcdb4960ff45b93735d7c7d96b760fcff8db2dc0e103d"
 dependencies = [
  "cfg-if",
- "windows-targets 0.52.4",
+ "windows-targets 0.48.1",
 ]
 
 [[package]]
@@ -3314,6 +3314,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "90ed8c1e510134f979dbc4f070f87d4313098b704861a105fe34231c70a3901c"
 
 [[package]]
+name = "lru"
+version = "0.12.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "37ee39891760e7d94734f6f63fedc29a2e4a152f836120753a72503f09fcf904"
+dependencies = [
+ "hashbrown 0.14.3",
+]
+
+[[package]]
 name = "lzma-rs"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3574,6 +3583,7 @@ dependencies = [
  "json-depth-checker",
  "levenshtein_automata",
  "liquid",
+ "lru",
  "maplit",
  "md5",
  "meili-snap",
@@ -3829,9 +3839,8 @@ dependencies = [
 
 [[package]]
 name = "obkv"
-version = "0.2.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a2e27bcfe835a379d32352112f6b8dbae2d99d16a5fff42abe6e5ba5386c1e5a"
+version = "0.3.0"
+source = "git+https://github.com/kerollmops/obkv?branch=unsized-kvreader#ce535874008ecac554f02e0c670e6caf62134d6b"
 
 [[package]]
 name = "once_cell"
@@ -4648,8 +4657,7 @@ dependencies = [
 [[package]]
 name = "roaring"
 version = "0.10.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f4b84ba6e838ceb47b41de5194a60244fac43d9fe03b71dbe8c5a201081d6d1"
+source = "git+https://github.com/RoaringBitmap/roaring-rs?branch=clone-iter-slice#348e58c2312fc37c0f351373cc7338cea86cf828"
 dependencies = [
  "bytemuck",
  "byteorder",

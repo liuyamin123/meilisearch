@@ -1247,7 +1247,7 @@ impl<'a> HitMaker<'a> {
             self.index.iter_documents(self.rtxn, std::iter::once(id))?.next().unwrap()?;
 
         // First generate a document with all the displayed fields
-        let displayed_document = make_document(&self.displayed_ids, &self.fields_ids_map, obkv)?;
+        let displayed_document = make_document(&self.displayed_ids, &self.fields_ids_map, &obkv)?;
 
         let add_vectors_fid =
             self.vectors_fid.filter(|_fid| self.retrieve_vectors == RetrieveVectors::Retrieve);
@@ -1642,7 +1642,7 @@ fn add_non_formatted_ids_to_formatted_options(
 fn make_document(
     displayed_attributes: &BTreeSet<FieldId>,
     field_ids_map: &FieldsIdsMap,
-    obkv: obkv::KvReaderU16,
+    obkv: &obkv::KvReaderU16,
 ) -> Result<Document, MeilisearchHttpError> {
     let mut document = serde_json::Map::new();
 
